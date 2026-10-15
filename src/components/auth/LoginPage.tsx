@@ -266,8 +266,8 @@ export const LoginPage: React.FC = () => {
                     </span>
                     <Briefcase className="w-3.5 h-3.5 text-stone-400 group-hover:text-emerald-700" />
                   </div>
-                  <p className="text-xs font-bold text-stone-900">H. Ahmad Suryadi</p>
-                  <p className="text-[11px] text-stone-500 mt-0.5">Akses Penuh, Approval Surat & Kas</p>
+                  <p className="text-xs font-bold text-stone-900">Ir. H. Gunawan Wibisono</p>
+                  <p className="text-[11px] text-stone-500 mt-0.5">Ketua RT (Akses Penuh & Approval)</p>
                 </button>
 
                 {/* 2. Bendahara */}

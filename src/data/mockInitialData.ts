@@ -20,8 +20,8 @@ import {
 export const INITIAL_USERS: User[] = [
   {
     id: 'user-ketua',
-    name: 'H. Ahmad Suryadi',
-    email: 'ahmad.suryadi@saungkebun.id',
+    name: 'Ir. H. Gunawan Wibisono',
+    email: 'gunawan.wibisono@saungkebun.id',
     phone: '0812-3456-7890',
     role: 'pengurus',
     position: 'Ketua RT',

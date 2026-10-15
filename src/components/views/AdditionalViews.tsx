@@ -673,9 +673,9 @@ export const LpjTriwulanView: React.FC = () => {
           <div>
             <p className="text-stone-500">Mengetahui, Ketua RT 04</p>
             <div className="h-14 flex items-center justify-center font-serif italic text-base text-stone-800 font-bold">
-              H. Ahmad Suryadi
+              Ir. H. Gunawan Wibisono
             </div>
-            <p className="font-bold text-stone-900 underline">H. Ahmad Suryadi</p>
+            <p className="font-bold text-stone-900 underline">Ir. H. Gunawan Wibisono</p>
           </div>
         </div>
       </div>

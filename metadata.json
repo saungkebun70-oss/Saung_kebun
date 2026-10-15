@@ -1,0 +1,6 @@
+{
+  "name": "SIP-SK - Sistem Informasi Perumahan Saung Kebun",
+  "description": "Aplikasi Manajemen Keuangan, Kepengurusan, dan Komunitas Warga Perumahan Saung Kebun yang asri, transparan, dan terintegrasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

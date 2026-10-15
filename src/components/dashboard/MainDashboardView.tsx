@@ -198,23 +198,23 @@ export const MainDashboardView: React.FC = () => {
       </section>
 
       {/* 1. Hero Banner matching image.png */}
-      <div className="relative rounded-2xl bg-[#10B981] text-white p-6 sm:p-7 shadow-sm overflow-hidden">
+      <div className="relative rounded-2xl bg-[#10B981] text-white p-5 sm:p-7 shadow-sm overflow-hidden">
         {/* Subtle decorative curved shape on the right */}
         <div className="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-emerald-400/20 pointer-events-none" />
         <div className="absolute right-10 -bottom-16 w-52 h-52 rounded-full bg-emerald-600/30 pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-              <span>Selamat Datang, {currentUser.name}</span>
-              <span className="text-2xl">👋</span>
+            <h2 className="text-lg sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+              <span className="truncate">Selamat Datang, {currentUser.name}</span>
+              <span className="text-xl sm:text-2xl shrink-0">👋</span>
             </h2>
             <p className="text-xs sm:text-sm text-emerald-50 mt-1 font-normal opacity-95">
-              Ringkasan pengelolaan keuangan Saung Kebun
+              Ringkasan pengelolaan keuangan & lingkungan Saung Kebun
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-start sm:self-auto">
+          <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
             <button
               onClick={() => setIsPaymentModalOpen(true)}
               className="px-3.5 py-2 text-xs font-bold text-[#10B981] bg-white hover:bg-stone-50 rounded-xl shadow-xs transition-colors flex items-center gap-1.5 whitespace-nowrap"
@@ -226,69 +226,69 @@ export const MainDashboardView: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Summary Metric Cards (4 Parallel Cards matching image.png) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 2. Summary Metric Cards (Responsive 1 or 2 columns on mobile, 4 on desktop) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Card 1: Total Pemasukan */}
-        <div className="bg-white rounded-2xl border border-stone-200/70 p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
-          <div>
-            <span className="text-xs font-medium text-stone-500 block mb-1">
+        <div className="bg-white rounded-2xl border border-stone-200/70 p-4 sm:p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
+          <div className="min-w-0 flex-1 mr-2">
+            <span className="text-xs font-medium text-stone-500 block mb-1 truncate">
               Total Pemasukan
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight font-mono tabular-nums">
+            <div className="text-lg sm:text-2xl font-extrabold text-stone-900 tracking-tight font-mono tabular-nums truncate">
               {formatIDR(totalIncome || 31030000)}
             </div>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-[#10B981] text-white flex items-center justify-center shrink-0 shadow-xs">
-            <TrendingUp className="w-6 h-6 stroke-[2.5]" />
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#10B981] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
           </div>
         </div>
 
         {/* Card 2: Menunggu Verifikasi */}
-        <div className="bg-white rounded-2xl border border-stone-200/70 p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
-          <div>
-            <span className="text-xs font-medium text-stone-500 block mb-1">
+        <div className="bg-white rounded-2xl border border-stone-200/70 p-4 sm:p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
+          <div className="min-w-0 flex-1 mr-2">
+            <span className="text-xs font-medium text-stone-500 block mb-1 truncate">
               Menunggu Verifikasi
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-blue-600 tracking-tight font-mono tabular-nums">
+            <div className="text-lg sm:text-2xl font-extrabold text-blue-600 tracking-tight font-mono tabular-nums truncate">
               {pendingVerificationCount}
             </div>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-[#3B82F6] text-white flex items-center justify-center shrink-0 shadow-xs">
-            <Clock className="w-6 h-6 stroke-[2.5]" />
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#3B82F6] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <Clock className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
           </div>
         </div>
 
         {/* Card 3: Belum Bayar */}
-        <div className="bg-white rounded-2xl border border-stone-200/70 p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
-          <div>
-            <span className="text-xs font-medium text-stone-500 block mb-1">
+        <div className="bg-white rounded-2xl border border-stone-200/70 p-4 sm:p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
+          <div className="min-w-0 flex-1 mr-2">
+            <span className="text-xs font-medium text-stone-500 block mb-1 truncate">
               Belum Bayar
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-[#F59E0B] tracking-tight font-mono tabular-nums">
+            <div className="text-lg sm:text-2xl font-extrabold text-[#F59E0B] tracking-tight font-mono tabular-nums truncate">
               {unpaidHousesCount}
             </div>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-[#F59E0B] text-white flex items-center justify-center shrink-0 shadow-xs">
-            <AlertCircle className="w-6 h-6 stroke-[2.5]" />
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#F59E0B] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
           </div>
         </div>
 
         {/* Card 4: Total User */}
-        <div className="bg-white rounded-2xl border border-stone-200/70 p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
-          <div>
-            <span className="text-xs font-medium text-stone-500 block mb-1">
+        <div className="bg-white rounded-2xl border border-stone-200/70 p-4 sm:p-5 shadow-xs flex items-center justify-between transition-all hover:shadow-sm">
+          <div className="min-w-0 flex-1 mr-2">
+            <span className="text-xs font-medium text-stone-500 block mb-1 truncate">
               Total User
             </span>
-            <div className="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight font-mono tabular-nums">
+            <div className="text-lg sm:text-2xl font-extrabold text-stone-900 tracking-tight font-mono tabular-nums truncate">
               {totalUsersCount}
             </div>
-            <div className="flex items-center gap-2 mt-1 text-[11px] font-semibold">
+            <div className="flex items-center gap-2 mt-1 text-[11px] font-semibold truncate">
               <span className="text-purple-600">{pengurusCount} Pengurus</span>
               <span className="text-[#10B981]">{wargaCount} Warga</span>
             </div>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-[#A855F7] text-white flex items-center justify-center shrink-0 shadow-xs">
-            <Users className="w-6 h-6 stroke-[2.5]" />
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#A855F7] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <Users className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
           </div>
         </div>
       </div>

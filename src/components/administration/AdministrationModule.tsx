@@ -316,7 +316,7 @@ export const AdministrationModule: React.FC = () => {
               {/* Tambah Warga Baru Button */}
               <button
                 onClick={openAddModal}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-[#10B981] hover:bg-[#059669] rounded-lg shadow-xs transition-colors whitespace-nowrap ml-auto"
+                className="flex items-center justify-center gap-1.5 px-3.5 py-2 text-xs font-bold text-white bg-[#10B981] hover:bg-[#059669] rounded-xl shadow-xs transition-colors whitespace-nowrap w-full sm:w-auto ml-0 sm:ml-auto"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>Tambah Warga Baru</span>

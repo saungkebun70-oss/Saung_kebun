@@ -165,10 +165,10 @@ export const FinanceModule: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-lg shrink-0 self-start sm:self-auto">
+        <div className="flex items-center gap-1 p-1 bg-stone-100 rounded-xl shrink-0 self-start sm:self-auto overflow-x-auto max-w-full">
           <button
             onClick={() => setActiveSubTab('iuran')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg whitespace-nowrap transition-colors ${
               activeSubTab === 'iuran'
                 ? 'bg-white text-stone-900 shadow-xs font-semibold'
                 : 'text-stone-600 hover:text-stone-900'
@@ -178,7 +178,7 @@ export const FinanceModule: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveSubTab('kas')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg whitespace-nowrap transition-colors ${
               activeSubTab === 'kas'
                 ? 'bg-white text-stone-900 shadow-xs font-semibold'
                 : 'text-stone-600 hover:text-stone-900'
@@ -188,7 +188,7 @@ export const FinanceModule: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveSubTab('donasi')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg whitespace-nowrap transition-colors ${
               activeSubTab === 'donasi'
                 ? 'bg-white text-stone-900 shadow-xs font-semibold'
                 : 'text-stone-600 hover:text-stone-900'

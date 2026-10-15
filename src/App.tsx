@@ -52,8 +52,8 @@ const AppContent: React.FC = () => {
         onCloseMobile={() => setIsMobileMenuOpen(false)} 
       />
 
-      {/* 2. Main Content Canvas with Left Margin for Sidebar */}
-      <div className="flex-1 lg:pl-64 flex flex-col min-h-screen w-full">
+      {/* 2. Main Content Canvas with Left Margin for Sidebar on md+ */}
+      <div className="flex-1 md:pl-64 flex flex-col min-h-screen w-full">
         {/* Top Header */}
         <TopHeader onOpenMobileMenu={() => setIsMobileMenuOpen(true)} />
 

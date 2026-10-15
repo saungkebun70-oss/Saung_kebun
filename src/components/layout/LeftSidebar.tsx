@@ -18,7 +18,8 @@ import {
   ShieldCheck, 
   User, 
   Settings,
-  Shield
+  Shield,
+  X
 } from 'lucide-react';
 
 interface LeftSidebarProps {
@@ -55,20 +56,22 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpenMobile, onCloseM
 
   return (
     <>
-      {/* Mobile backdrop */}
+      {/* Mobile backdrop with semi-transparent overlay */}
       {isOpenMobile && (
         <div 
           onClick={onCloseMobile}
-          className="fixed inset-0 bg-stone-900/50 z-40 lg:hidden backdrop-blur-xs" 
+          className="fixed inset-0 bg-stone-900/60 z-40 md:hidden backdrop-blur-xs transition-opacity duration-200" 
+          aria-label="Tutup menu navigasi"
         />
       )}
 
+      {/* Slide-over Drawer / Sidebar */}
       <aside className={`
-        fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-stone-200 flex flex-col justify-between transition-transform duration-200 ease-in-out
-        ${isOpenMobile ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-stone-200 flex flex-col justify-between transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none
+        ${isOpenMobile ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}>
-        {/* Brand Header */}
-        <div className="h-16 flex items-center px-6 border-b border-stone-100 shrink-0">
+        {/* Brand Header & Mobile Close Button */}
+        <div className="h-16 flex items-center justify-between px-5 sm:px-6 border-b border-stone-100 shrink-0">
           <div className="flex items-center gap-3">
             {/* Green Shield Icon matching image.png */}
             <div className="w-10 h-10 rounded-xl bg-[#10B981] text-white flex items-center justify-center shadow-xs shrink-0">
@@ -83,6 +86,15 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpenMobile, onCloseM
               </span>
             </div>
           </div>
+
+          {/* Tombol Tutup (X) khusus mobile */}
+          <button
+            onClick={onCloseMobile}
+            className="md:hidden p-2 -mr-2 text-stone-400 hover:text-stone-700 hover:bg-stone-100 rounded-xl transition-colors"
+            aria-label="Tutup Sidebar"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
         {/* Menu Navigation Items (Scrollable) */}

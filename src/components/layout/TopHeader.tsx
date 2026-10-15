@@ -19,7 +19,8 @@ import {
   CheckCircle2,
   Check,
   Clock,
-  ArrowRight
+  ArrowRight,
+  X
 } from 'lucide-react';
 
 interface TopHeaderProps {
@@ -111,65 +112,75 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenMobileMenu }) => {
   const shortName = currentUser.name.split(' ').slice(0, 2).join(' ');
 
   return (
-    <header className="h-18 bg-white border-b border-stone-200/80 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-30">
-      {/* Left: Page Title & Welcome Subtitle */}
-      <div className="flex items-center gap-3">
+    <header className="h-16 sm:h-18 bg-white border-b border-stone-200/80 px-3 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30">
+      {/* Left: Hamburger Button (on mobile < 768px) & Page Title */}
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 mr-2">
         <button
           onClick={onOpenMobileMenu}
-          className="lg:hidden p-2 -ml-2 text-stone-600 hover:text-stone-900 rounded-lg"
+          className="md:hidden p-2 -ml-1 text-stone-700 hover:text-stone-900 hover:bg-stone-100 rounded-xl transition-colors shrink-0"
           aria-label="Buka Menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
-        <div>
-          <h1 className="text-lg sm:text-xl font-bold tracking-tight text-stone-900 leading-tight">
+        <div className="min-w-0">
+          <h1 className="text-base sm:text-xl font-bold tracking-tight text-stone-900 leading-tight truncate">
             {getTabTitle(activeTab)}
           </h1>
-          <p className="text-xs text-stone-500 mt-0.5">
+          <p className="text-[11px] sm:text-xs text-stone-500 mt-0.5 truncate hidden xs:block">
             Selamat datang, {currentUser.name}
           </p>
         </div>
       </div>
 
-      {/* Right: Notification Bell & Profile Dropdown */}
-      <div className="flex items-center gap-3 sm:gap-4 relative">
-        {/* Panic Button Mini Indicator */}
+      {/* Right: Panic Button, Notification Bell & Profile Dropdown */}
+      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        {/* Panic Button Mini Indicator (Responsive) */}
         <button
           onClick={() => {
             if (panicAlert?.active) return;
             triggerPanicAlert('Gangguan Keamanan', `Laporan darurat dari ${currentUser.name}`);
           }}
-          className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-full border transition-all ${
+          className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-full border transition-all ${
             panicAlert?.active 
               ? 'bg-rose-600 text-white animate-pulse border-rose-700' 
               : 'text-rose-600 bg-rose-50 border-rose-200 hover:bg-rose-100'
           }`}
           title="Tombol Darurat Panic Button"
         >
-          <AlertTriangle className="w-3.5 h-3.5" />
-          <span>Panic Button</span>
+          <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+          <span className="hidden sm:inline">Panic Button</span>
+          <span className="sm:hidden text-[11px] font-bold">Panic</span>
         </button>
 
-        {/* Notification Bell with Red Badge matching image.png */}
+        {/* Notification Bell with Red Badge */}
         <div className="relative" ref={notifRef}>
           <button
             onClick={() => setIsNotifOpen(!isNotifOpen)}
-            className="w-9 h-9 rounded-full hover:bg-stone-100 flex items-center justify-center text-stone-500 hover:text-stone-800 transition-colors relative"
+            className="w-9 h-9 rounded-full hover:bg-stone-100 flex items-center justify-center text-stone-600 hover:text-stone-900 transition-colors relative"
             title="Pemberitahuan Warga"
           >
             <Bell className="w-5 h-5" />
             {unreadNotificationsCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 min-w-4 h-4 px-1 rounded-full bg-rose-500 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-white animate-pulse">
+              <span className="absolute top-1 right-1 min-w-4 h-4 px-1 rounded-full bg-rose-500 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-white animate-pulse">
                 {unreadNotificationsCount}
               </span>
             )}
           </button>
 
-          {/* Notifications Flyout */}
+          {/* Mobile backdrop for notification modal */}
           {isNotifOpen && (
-            <div className="absolute right-0 mt-2 w-88 sm:w-96 bg-white rounded-2xl border border-stone-200 shadow-2xl p-4 z-50 text-xs">
-              <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+            <div 
+              onClick={() => setIsNotifOpen(false)}
+              className="fixed inset-0 bg-stone-900/40 z-40 sm:hidden backdrop-blur-xs"
+              aria-label="Tutup notifikasi"
+            />
+          )}
+
+          {/* Notifications Flyout / Centered Modal on mobile */}
+          {isNotifOpen && (
+            <div className="fixed inset-x-3 top-16 sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-96 max-w-lg mx-auto bg-white rounded-2xl border border-stone-200 shadow-2xl p-4 z-50 text-xs flex flex-col max-h-[82vh] sm:max-h-[500px]">
+              <div className="flex items-center justify-between pb-3 border-b border-stone-100 shrink-0">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-stone-900 text-sm">Pemberitahuan Sistem</span>
                   {unreadNotificationsCount > 0 && (
@@ -178,21 +189,34 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenMobileMenu }) => {
                     </span>
                   )}
                 </div>
-                {unreadNotificationsCount > 0 ? (
+
+                <div className="flex items-center gap-2">
+                  {unreadNotificationsCount > 0 ? (
+                    <button
+                      onClick={() => markAllNotificationsAsRead()}
+                      className="text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold flex items-center gap-1 transition-colors"
+                    >
+                      <Check className="w-3 h-3" />
+                      <span className="hidden sm:inline">Tandai Semua Dibaca</span>
+                      <span className="sm:hidden">Baca Semua</span>
+                    </button>
+                  ) : (
+                    <span className="text-[11px] text-stone-400">Semua terbaca</span>
+                  )}
+
+                  {/* Tombol Tutup X khusus mobile */}
                   <button
-                    onClick={() => markAllNotificationsAsRead()}
-                    className="text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold flex items-center gap-1 transition-colors"
+                    onClick={() => setIsNotifOpen(false)}
+                    className="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 sm:hidden transition-colors ml-1"
+                    aria-label="Tutup Pemberitahuan"
                   >
-                    <Check className="w-3 h-3" />
-                    <span>Tandai Semua Dibaca</span>
+                    <X className="w-4 h-4" />
                   </button>
-                ) : (
-                  <span className="text-[11px] text-stone-400">Semua telah dibaca</span>
-                )}
+                </div>
               </div>
 
-              {/* Notification List */}
-              <div className="max-h-96 overflow-y-auto divide-y divide-stone-100 mt-2 -mx-1 px-1">
+              {/* Notification List (Scrollable) */}
+              <div className="overflow-y-auto divide-y divide-stone-100 mt-2 -mx-1 px-1 flex-1">
                 {notifications.length === 0 ? (
                   <div className="py-8 text-center text-stone-400">
                     <Bell className="w-8 h-8 mx-auto mb-2 text-stone-300 stroke-[1.5]" />
@@ -249,24 +273,33 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenMobileMenu }) => {
           )}
         </div>
 
-        {/* User Profile Dropdown Pill matching image.png */}
+        {/* User Profile Dropdown */}
         <div className="relative" ref={profileRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="flex items-center gap-2 py-1 px-2 hover:bg-stone-50 rounded-xl transition-all"
+            className="flex items-center gap-1.5 sm:gap-2 py-1 px-1.5 sm:px-2 hover:bg-stone-50 rounded-xl transition-all"
           >
-            <div className="w-8 h-8 rounded-full bg-[#10B981] text-white font-bold flex items-center justify-center text-xs shadow-2xs">
+            <div className="w-8 h-8 rounded-full bg-[#10B981] text-white font-bold flex items-center justify-center text-xs shadow-2xs shrink-0">
               {currentUser.name.charAt(0)}
             </div>
             <span className="text-xs font-semibold text-stone-900 hidden sm:inline whitespace-nowrap">
               {shortName}
             </span>
-            <ChevronDown className="w-3.5 h-3.5 text-stone-400" />
+            <ChevronDown className="w-3.5 h-3.5 text-stone-400 shrink-0" />
           </button>
+
+          {/* Mobile backdrop for profile dropdown */}
+          {isDropdownOpen && (
+            <div 
+              onClick={() => setIsDropdownOpen(false)}
+              className="fixed inset-0 bg-stone-900/40 z-40 sm:hidden backdrop-blur-xs"
+              aria-label="Tutup profil"
+            />
+          )}
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl border border-stone-200 shadow-xl p-3 z-50 text-xs space-y-2">
+            <div className="fixed inset-x-3 top-16 sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 max-w-sm ml-auto bg-white rounded-2xl border border-stone-200 shadow-xl p-3 z-50 text-xs space-y-2">
               <div className="p-2 bg-stone-50 rounded-xl">
                 <p className="font-bold text-stone-900">{currentUser.name}</p>
                 <p className="text-[11px] text-stone-500">{currentUser.email}</p>
